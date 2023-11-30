@@ -111,26 +111,77 @@ public class AutoLocalization {
         }
     }
     
-    public static func localizeInterface(_ viewController: UIViewController, from sourceLanguage: TranslateLanguage, to targetLanguage: TranslateLanguage) {
-        for label in viewController.view.subviews.filter({ $0 is UILabel }) {
-            guard let label = label as? UILabel,
-                  let text = label.text else { continue }
-            AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
-                guard let translatedText else { return }
-                label.text = translatedText
-                label.sizeToFit()
+    public static func localizeInterface(_ viewController: UIViewController, from sourceLanguage: TranslateLanguage, to targetLanguage: TranslateLanguage, options: LocalizationOptions) {
+        if options.contains(.labels) {
+            for label in viewController.view.subviews.filter({ $0 is UILabel }) {
+                guard let label = label as? UILabel,
+                      let text = label.text else { continue }
+                AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
+                    guard let translatedText else { return }
+                    label.text = translatedText
+                    label.sizeToFit()
+                }
+            }
+        }
+        if options.contains(.buttons) {
+            for button in viewController.view.subviews.filter({ $0 is UIButton }) {
+                guard let button = button as? UIButton,
+                      let text = button.titleLabel?.text else { continue }
+                AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
+                    guard let translatedText else { return }
+                    button.titleLabel?.text = translatedText
+                    button.sizeToFit()
+                }
+            }
+        }
+        if options.contains(.textfields) {
+            for textField in viewController.view.subviews.filter({ $0 is UITextField }) {
+                guard let textField = textField as? UITextField,
+                      let text = textField.text else { continue }
+                AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
+                    guard let translatedText else { return }
+                    textField.text = translatedText
+                    textField.sizeToFit()
+                }
+            }
+        }
+        if options.contains(.toolbars) {
+            for toolbar in viewController.view.subviews.filter({ $0 is UIToolbar }) {
+                if let toolbar = toolbar as? UIToolbar,
+                   let toolbarItems = toolbar.items {
+                    for item in toolbarItems {
+                        guard let title = item.title else { continue }
+                        AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, title) { translatedText, _ in
+                            guard let translatedText = translatedText else { return }
+                            item.title = translatedText
+                        }
+                    }
+                }
+            }
+        }
+        if options.contains(.segmentedControls) {
+            for segmentedControl in viewController.view.subviews.filter({ $0 is UISegmentedControl }) {
+                guard let segmentedControl = segmentedControl as? UISegmentedControl else { continue }
+                for i in 0..<segmentedControl.numberOfSegments {
+                    guard let title = segmentedControl.titleForSegment(at: i) else { continue }
+                    AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, title) { translatedText, _ in
+                        guard let translatedText else { return }
+                        segmentedControl.setTitle(translatedText, forSegmentAt: i)
+                        segmentedControl.sizeToFit()
+                    }
+                }
+            }
+        }
+        if options.contains(.searchBars) {
+            for searchBar in viewController.view.subviews.compactMap({ $0 as? UISearchBar }) {
+                guard let text = searchBar.placeholder else { continue }
+                AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
+                    guard let translatedText = translatedText else { return }
+                    searchBar.placeholder = translatedText
+                }
             }
         }
         
-        for button in viewController.view.subviews.filter({ $0 is UIButton }) {
-            guard let button = button as? UIButton,
-                  let text = button.titleLabel?.text else { continue }
-            AutoLocalization.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
-                guard let translatedText else { return }
-                button.titleLabel?.text = translatedText
-                button.sizeToFit()
-            }
-        }
     }
     
 }

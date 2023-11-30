@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50B440C2B1903F8003FE18C /* LocalizationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B440B2B1903F8003FE18C /* LocalizationOptions.swift */; };
 		B554ABAF2B17C76000CF3DF0 /* AutoLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554ABAE2B17C76000CF3DF0 /* AutoLocalization.swift */; };
 		B55A88AD2B17C0C700BC4AEE /* AutoLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = B55A88AC2B17C0C700BC4AEE /* AutoLocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B5EABE0B2B18AA010002B886 /* DetailedTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EABE0A2B18AA010002B886 /* DetailedTranslator.swift */; };
@@ -19,6 +20,7 @@
 		24A1B859F63F8F3FF470F4F3 /* libPods-AutoLocalization.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoLocalization.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7AFF0FD6851AA715B199F0 /* Pods-AutoLocalization.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLocalization.release.xcconfig"; path = "Target Support Files/Pods-AutoLocalization/Pods-AutoLocalization.release.xcconfig"; sourceTree = "<group>"; };
 		4A55DCB7E84FD02DAD9611A4 /* Pods-AutoLocalization.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLocalization.debug.xcconfig"; path = "Target Support Files/Pods-AutoLocalization/Pods-AutoLocalization.debug.xcconfig"; sourceTree = "<group>"; };
+		B50B440B2B1903F8003FE18C /* LocalizationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationOptions.swift; sourceTree = "<group>"; };
 		B554ABAE2B17C76000CF3DF0 /* AutoLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLocalization.swift; sourceTree = "<group>"; };
 		B55A88A92B17C0C700BC4AEE /* AutoLocalization.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutoLocalization.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55A88AC2B17C0C700BC4AEE /* AutoLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoLocalization.h; sourceTree = "<group>"; };
@@ -88,9 +90,9 @@
 		B5EABE092B18A9E20002B886 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B5EABE372B18E2F40002B886 /* Enum */,
 				B5EABE0F2B18B6170002B886 /* Error */,
 				B5EABE0A2B18AA010002B886 /* DetailedTranslator.swift */,
+				B50B440B2B1903F8003FE18C /* LocalizationOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,13 +111,6 @@
 				B5EABE102B18B62A0002B886 /* DownloadError.swift */,
 			);
 			path = Error;
-			sourceTree = "<group>";
-		};
-		B5EABE372B18E2F40002B886 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B50B440C2B1903F8003FE18C /* LocalizationOptions.swift in Sources */,
 				B5EABE112B18B62A0002B886 /* DownloadError.swift in Sources */,
 				B5EABE0E2B18AD460002B886 /* LanguageManager.swift in Sources */,
 				B554ABAF2B17C76000CF3DF0 /* AutoLocalization.swift in Sources */,
@@ -393,7 +389,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,7 +424,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
