@@ -82,8 +82,6 @@ public class AutoLocalization {
         dispatchGroup.notify(queue: .main) {
             completion(.success(()))
         }
-        
-        dispatchGroup.wait()
     }
     
     // MARK: - Public
