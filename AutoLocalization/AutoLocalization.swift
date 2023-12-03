@@ -47,6 +47,23 @@ public class AutoLocalization {
         
         let dispatchGroup = DispatchGroup()
         
+//        if !LanguageManager.shared.isLanguageDownloaded(sourceLanguage) ||
+//            !LanguageManager.shared.isLanguageDownloaded(targetLanguage) {
+//            let alert = UIAlertController(
+//                title: "Download needed",
+//                message: "The missing language models need to be downloaded",
+//                preferredStyle: .alert
+//            )
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//            let downloadAction = UIAlertAction(title: "Download", style: .default, handler: { _ in
+//                
+//            })
+//            alert.addAction(cancelAction)
+//            alert.addAction(downloadAction)
+//            
+//            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+//        }
+        
         if !LanguageManager.shared.isLanguageDownloaded(sourceLanguage) {
             dispatchGroup.enter()
             // TODO: Send alert asking to download language model

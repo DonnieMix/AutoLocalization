@@ -31,16 +31,22 @@ class LanguageManager {
         return false
     }
     
-    public func downloadLanguage(_ language: TranslateLanguage) {
+    public func downloadLanguage(_ language: TranslateLanguage) -> Progress {
         let languageModel = TranslateRemoteModel.translateRemoteModel(language: language)
-        
-        modelManager.download(
+        return modelManager.download(
             languageModel,
             conditions: ModelDownloadConditions(
                 allowsCellularAccess: false,
                 allowsBackgroundDownloading: true
             )
         )
+    }
+    
+    public func deleteLanguage(_ language: TranslateLanguage) {
+        let languageModel = TranslateRemoteModel.translateRemoteModel(language: language)
+        modelManager.deleteDownloadedModel(languageModel) { error in
+            guard error == nil else { return }
+        }
     }
     
 }
