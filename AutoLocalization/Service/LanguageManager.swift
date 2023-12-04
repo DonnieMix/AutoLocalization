@@ -15,6 +15,8 @@ class LanguageManager {
     private init() {}
     
     // MARK: - Private
+    private let autoLocalization = AutoLocalization.shared
+    
     private let modelManager = ModelManager.modelManager()
     
     private var localModels: Set<TranslateRemoteModel> {
@@ -31,15 +33,21 @@ class LanguageManager {
         return false
     }
     
+    @discardableResult
     public func downloadLanguage(_ language: TranslateLanguage) -> Progress {
         let languageModel = TranslateRemoteModel.translateRemoteModel(language: language)
-        return modelManager.download(
+        print("Downloading \(language.name)")
+        NotificationCenter.default.addObserver(forName: .mlkitModelDownloadDidSucceed, object: nil, queue: nil, using: autoLocalization.handleDownloadLanguageSuccess(_:))
+        NotificationCenter.default.addObserver(forName: .mlkitModelDownloadDidFail, object: nil, queue: nil, using: autoLocalization.handleDownloadLanguageFailed(_:))
+        let progress = modelManager.download(
             languageModel,
             conditions: ModelDownloadConditions(
                 allowsCellularAccess: false,
                 allowsBackgroundDownloading: true
             )
         )
+        
+        return progress
     }
     
     public func deleteLanguage(_ language: TranslateLanguage) {

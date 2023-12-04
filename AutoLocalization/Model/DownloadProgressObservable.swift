@@ -28,6 +28,8 @@ class DownloadProgressObservable: NSObject, ObservableObject {
                     return
                 }
                 self?.isCompleted = newValue
+                self?.isDownloadCompleted = newValue
+                print("Download of \(self?.language.name) succeeded")
             }
         }
     }
@@ -36,8 +38,10 @@ class DownloadProgressObservable: NSObject, ObservableObject {
     @Published var isCompleted: Bool
     private var toDelete: Bool = false
     private let language: TranslateLanguage
+    @objc dynamic var isDownloadCompleted: Bool = false
     
     func scheduleInstantDeletion() {
         toDelete = true
     }
+
 }
