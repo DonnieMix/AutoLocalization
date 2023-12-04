@@ -9,10 +9,10 @@ import Foundation
 import MLKitTranslate
 import UIKit
 
-public class AutoLocalization {
+public class AutoLocalization: NSObject {
     // MARK: - Singleton
     public static var shared: AutoLocalization = AutoLocalization()
-    private init() {}
+    private override init() { super.init() }
     
     // MARK: - Private
     private var translators: [DetailedTranslator] = []
@@ -97,6 +97,66 @@ public class AutoLocalization {
         return self
     }
     
+    // MARK: - Observers
+    private func addLabelObservation(_ label: UILabel) {
+        label.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
+    }
+    
+    private func removeLabelObservation(_ label: UILabel) {
+        if label.observationInfo != nil {
+            label.removeObserver(self, forKeyPath: "text")
+        }
+    }
+    
+    private func addButtonObservation(_ button: UIButton) {
+        button.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
+    }
+    
+    private func removeButtonObservation(_ button: UIButton) {
+        if button.observationInfo != nil {
+            button.removeObserver(self, forKeyPath: "text")
+        }
+    }
+    private func addTextFieldObservation(_ textField: UITextField) {
+        textField.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
+    }
+    
+    private func removeTextFieldObservation(_ textField: UITextField) {
+        if textField.observationInfo != nil {
+            textField.removeObserver(self, forKeyPath: "text")
+        }
+    }
+    
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "text" {
+            let sourceLanguage = AutoLocalization.shared.currentSourceLanguage
+            let targetLanguage = AutoLocalization.shared.currentTargetLanguage
+            if let label = object as? UILabel, let newText = label.text {
+                AutoLocalization.shared.translate(from: sourceLanguage, to: targetLanguage, newText) { translatedText, _ in
+                    guard let translatedText else { return }
+                    label.text = translatedText
+                    label.sizeToFit()
+                }
+            }
+            else if let button = object as? UIButton, let newText = button.titleLabel?.text {
+                AutoLocalization.shared.translate(from: sourceLanguage, to: targetLanguage, newText) { translatedText, _ in
+                    guard let translatedText else { return }
+                    button.setTitle(translatedText, for: .normal)
+                    button.titleLabel?.text = translatedText
+                    button.sizeToFit()
+                }
+            }
+            else if let textField = object as? UITextField, let newText = textField.text {
+                AutoLocalization.shared.translate(from: sourceLanguage, to: targetLanguage, newText) { translatedText, _ in
+                    guard let translatedText else { return }
+                    textField.text = translatedText
+                    textField.sizeToFit()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Localize method
     public func localizeInterface(from sourceLanguage: TranslateLanguage, to targetLanguage: TranslateLanguage, options: LocalizationOptions) {
         guard let viewController = currentViewControllerToLocalize else { return }
         checkLanguageModels(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage) { result in
@@ -108,33 +168,44 @@ public class AutoLocalization {
                     for label in viewController.view.subviews.filter({ $0 is UILabel }) {
                         guard let label = label as? UILabel,
                               let text = label.text else { continue }
+                        
+                        self.removeLabelObservation(label)
                         AutoLocalization.shared.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
                             guard let translatedText else { return }
                             label.text = translatedText
                             label.sizeToFit()
                         }
+                        self.addLabelObservation(label)
                     }
                 }
                 if options.contains(.buttons) {
                     for button in viewController.view.subviews.filter({ $0 is UIButton }) {
                         guard let button = button as? UIButton,
                               let text = button.titleLabel?.text else { continue }
+                        
+                        self.removeButtonObservation(button)
                         AutoLocalization.shared.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
                             guard let translatedText else { return }
+                            button.setTitle(translatedText, for: .normal)
                             button.titleLabel?.text = translatedText
                             button.sizeToFit()
                         }
+                        self.addButtonObservation(button)
                     }
                 }
                 if options.contains(.textfields) {
                     for textField in viewController.view.subviews.filter({ $0 is UITextField }) {
                         guard let textField = textField as? UITextField,
+                              !textField.isUserInteractionEnabled,
                               let text = textField.text else { continue }
+                        
+                        self.removeTextFieldObservation(textField)
                         AutoLocalization.shared.translate(from: sourceLanguage, to: targetLanguage, text) { translatedText, _ in
                             guard let translatedText else { return }
                             textField.text = translatedText
                             textField.sizeToFit()
                         }
+                        self.addTextFieldObservation(textField)
                     }
                 }
                 if options.contains(.toolbars) {
@@ -200,7 +271,8 @@ public class AutoLocalization {
         }
     }
     
-    let dispatchGroup: DispatchGroup = DispatchGroup()
+    // MARK: - Downloading utilities
+    private let dispatchGroup: DispatchGroup = DispatchGroup()
     
     private func downloadLanguages(languages: [TranslateLanguage], completion: @escaping () -> Void) {
         dispatchGroup.enter()

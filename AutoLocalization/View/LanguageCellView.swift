@@ -12,6 +12,9 @@ struct LanguageCellView: View {
     let language: TranslateLanguage
     @State var downloadStatus: DownloadStatus = .none
     @ObservedObject var downloadProgress: DownloadProgressObservable
+    @Binding var listChosenLanguage: TranslateLanguage
+    @Binding var listHasChosenLanguage: Bool
+    let localizationOptions: LocalizationOptions
     
     var body: some View {
         HStack {
@@ -23,7 +26,9 @@ struct LanguageCellView: View {
                 .onTapGesture {
                     if LanguageManager.shared.isLanguageDownloaded(language) &&
                         AutoLocalization.shared.currentTargetLanguage != language {
-                        AutoLocalization.shared.localizeInterface(from: AutoLocalization.shared.currentTargetLanguage, to: language, options: .all)
+                        AutoLocalization.shared.localizeInterface(from: AutoLocalization.shared.currentTargetLanguage, to: language, options: localizationOptions)
+                        listChosenLanguage = language
+                        listHasChosenLanguage = true
                     }
                 }
             Button(action: toggleDownload) {
@@ -63,7 +68,3 @@ struct LanguageCellView: View {
         }
     }
 }
-
-//#Preview {
-//    LanguageCellView(language: .english, downloadStatus: LanguageCellView.debugStatus, downloadProgress: DownloadProgressObservable())
-//}

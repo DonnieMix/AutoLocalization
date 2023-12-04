@@ -18,6 +18,7 @@
 		B5EABE0B2B18AA010002B886 /* DetailedTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EABE0A2B18AA010002B886 /* DetailedTranslator.swift */; };
 		B5EABE0E2B18AD460002B886 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EABE0D2B18AD460002B886 /* LanguageManager.swift */; };
 		B5EABE112B18B62A0002B886 /* DownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EABE102B18B62A0002B886 /* DownloadError.swift */; };
+		B5EC8FC02B1E20CB0014A1E5 /* UILanguageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EC8FBF2B1E20CB0014A1E5 /* UILanguageListView.swift */; };
 		BC233D33F37DB259F7A8F5F1 /* libPods-AutoLocalization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A1B859F63F8F3FF470F4F3 /* libPods-AutoLocalization.a */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		B5EABE0A2B18AA010002B886 /* DetailedTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTranslator.swift; sourceTree = "<group>"; };
 		B5EABE0D2B18AD460002B886 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		B5EABE102B18B62A0002B886 /* DownloadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadError.swift; sourceTree = "<group>"; };
+		B5EC8FBF2B1E20CB0014A1E5 /* UILanguageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILanguageListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				B502D4F32B1A34EF0040C729 /* LanguageListView.swift */,
 				B502D4F52B1A35150040C729 /* LanguageCellView.swift */,
+				B5EC8FBF2B1E20CB0014A1E5 /* UILanguageListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				B554ABAF2B17C76000CF3DF0 /* AutoLocalization.swift in Sources */,
 				B5EABE0B2B18AA010002B886 /* DetailedTranslator.swift in Sources */,
 				B502D5022B1BDA740040C729 /* DownloadStatus.swift in Sources */,
+				B5EC8FC02B1E20CB0014A1E5 /* UILanguageListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
