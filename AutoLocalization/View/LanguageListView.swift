@@ -7,21 +7,22 @@
 
 import SwiftUI
 import MLKitTranslate
+import UIKit
 
 public struct LanguageListView: View {
-    public init() {
-        
-    }
+    
+    public init() {}
     
     public var body: some View {
         List {
             ForEach(TranslateLanguage.allLanguages().sorted(by: { $0.name < $1.name }), id: \.self) { language in
                 LanguageCellView(language: language, downloadProgress: DownloadProgressObservable(language: language))
+                    
             }
         }
     }
 }
 
-#Preview {
-    LanguageListView()
-}
+//#Preview {
+//    LanguageListView()
+//}

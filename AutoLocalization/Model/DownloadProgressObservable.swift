@@ -29,7 +29,6 @@ class DownloadProgressObservable: NSObject, ObservableObject {
                 }
                 self?.isCompleted = newValue
                 self?.isDownloadCompleted = newValue
-                print("Download of \(self?.language.name) succeeded")
             }
         }
     }

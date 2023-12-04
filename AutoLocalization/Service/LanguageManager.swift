@@ -37,8 +37,8 @@ class LanguageManager {
     public func downloadLanguage(_ language: TranslateLanguage) -> Progress {
         let languageModel = TranslateRemoteModel.translateRemoteModel(language: language)
         print("Downloading \(language.name)")
-        NotificationCenter.default.addObserver(forName: .mlkitModelDownloadDidSucceed, object: nil, queue: nil, using: autoLocalization.handleDownloadLanguageSuccess(_:))
-        NotificationCenter.default.addObserver(forName: .mlkitModelDownloadDidFail, object: nil, queue: nil, using: autoLocalization.handleDownloadLanguageFailed(_:))
+        NotificationCenter.default.addObserver(forName: .mlkitModelDownloadDidSucceed, object: autoLocalization, queue: nil, using: autoLocalization.handleDownloadLanguageSuccess(_:))
+        NotificationCenter.default.addObserver(forName: .mlkitModelDownloadDidFail, object: autoLocalization, queue: nil, using: autoLocalization.handleDownloadLanguageFailed(_:))
         let progress = modelManager.download(
             languageModel,
             conditions: ModelDownloadConditions(

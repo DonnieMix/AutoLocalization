@@ -17,6 +17,15 @@ struct LanguageCellView: View {
         HStack {
             Text(language.name)
                 .padding()
+                .frame(alignment: .leading)
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    if LanguageManager.shared.isLanguageDownloaded(language) &&
+                        AutoLocalization.shared.currentTargetLanguage != language {
+                        AutoLocalization.shared.localizeInterface(from: AutoLocalization.shared.currentTargetLanguage, to: language, options: .all)
+                    }
+                }
             Button(action: toggleDownload) {
                 switch downloadStatus {
                 case .downloaded:
@@ -30,6 +39,7 @@ struct LanguageCellView: View {
                         .font(.title)
                 }
             }
+            .frame(alignment: .trailing)
         }
         .onReceive(downloadProgress.$isCompleted) { completed in
             if completed {

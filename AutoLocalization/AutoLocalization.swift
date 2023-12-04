@@ -70,6 +70,10 @@ public class AutoLocalization {
     }
     
     // MARK: - Public
+    public var currentSourceLanguage: TranslateLanguage = .english
+    public var currentTargetLanguage: TranslateLanguage = .ukrainian
+    public var currentViewControllerToLocalize: UIViewController?
+    
     public func translate(
         from sourceLanguage: TranslateLanguage,
         to targetLanguage: TranslateLanguage,
@@ -87,10 +91,19 @@ public class AutoLocalization {
         }
     }
     
-    public func localizeInterface(_ viewController: UIViewController, from sourceLanguage: TranslateLanguage, to targetLanguage: TranslateLanguage, options: LocalizationOptions) {
+    @discardableResult
+    public func setViewControllerToLocalize(_ viewController: UIViewController) -> AutoLocalization {
+        currentViewControllerToLocalize = viewController
+        return self
+    }
+    
+    public func localizeInterface(from sourceLanguage: TranslateLanguage, to targetLanguage: TranslateLanguage, options: LocalizationOptions) {
+        guard let viewController = currentViewControllerToLocalize else { return }
         checkLanguageModels(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage) { result in
             switch result {
             case .success:
+                self.currentSourceLanguage = sourceLanguage
+                self.currentTargetLanguage = targetLanguage
                 if options.contains(.labels) {
                     for label in viewController.view.subviews.filter({ $0 is UILabel }) {
                         guard let label = label as? UILabel,
@@ -170,7 +183,7 @@ public class AutoLocalization {
                 let downloadAction = UIAlertAction(title: "Download", style: .default, handler: { _ in
                     guard let downloadError = error as? DownloadError else { return }
                     self.downloadLanguages(languages: downloadError.absentLanguages) {
-                        self.localizeInterface(viewController, from: sourceLanguage, to: targetLanguage, options: options)
+                        self.localizeInterface(from: sourceLanguage, to: targetLanguage, options: options)
                     }
                 })
                 alert.addAction(cancelAction)
