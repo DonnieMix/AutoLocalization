@@ -24,10 +24,10 @@ import AutoLocalization
    Then call method ```localizeInterface(from:, to:, options:)``` passing language of your interface, language you would like to localize interface to and localization options where you can define which UIKit interface elements you want to localize.
    
    You can choose different options of the below:
-   1) Only one type of elements, e.g. ```.labels```
-   2) Multiple types of elements, e.g. ```[.labels, .buttons]```
-   3) All types of elements excluding some, e.g. ```.all.excluding(.textFields)```
-   4) All possible types of elements ```.all```
+   + Only one type of elements, e.g. ```.labels```
+   + Multiple types of elements, e.g. ```[.labels, .buttons]```
+   + All types of elements excluding some, e.g. ```.all.excluding(.textFields)```
+   + All possible types of elements ```.all```
 
 The example of interface localization at the View Controller appearance:
 
