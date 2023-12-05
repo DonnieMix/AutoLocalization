@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 import MLKitTranslate
 
-public class UILanguageListView: UIView {
+class UILanguageListView: UIView {
     
     private var viewController: UIViewController? = nil
     

@@ -19,6 +19,7 @@
 		B5EABE0E2B18AD460002B886 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EABE0D2B18AD460002B886 /* LanguageManager.swift */; };
 		B5EABE112B18B62A0002B886 /* DownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EABE102B18B62A0002B886 /* DownloadError.swift */; };
 		B5EC8FC02B1E20CB0014A1E5 /* UILanguageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EC8FBF2B1E20CB0014A1E5 /* UILanguageListView.swift */; };
+		B5EC8FC22B1EA4480014A1E5 /* UILanguagePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EC8FC12B1EA4480014A1E5 /* UILanguagePickViewController.swift */; };
 		BC233D33F37DB259F7A8F5F1 /* libPods-AutoLocalization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A1B859F63F8F3FF470F4F3 /* libPods-AutoLocalization.a */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		B5EABE0D2B18AD460002B886 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		B5EABE102B18B62A0002B886 /* DownloadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadError.swift; sourceTree = "<group>"; };
 		B5EC8FBF2B1E20CB0014A1E5 /* UILanguageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILanguageListView.swift; sourceTree = "<group>"; };
+		B5EC8FC12B1EA4480014A1E5 /* UILanguagePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILanguagePickViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				B502D4F32B1A34EF0040C729 /* LanguageListView.swift */,
 				B502D4F52B1A35150040C729 /* LanguageCellView.swift */,
 				B5EC8FBF2B1E20CB0014A1E5 /* UILanguageListView.swift */,
+				B5EC8FC12B1EA4480014A1E5 /* UILanguagePickViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B50B440C2B1903F8003FE18C /* LocalizationOptions.swift in Sources */,
+				B5EC8FC22B1EA4480014A1E5 /* UILanguagePickViewController.swift in Sources */,
 				B5EABE112B18B62A0002B886 /* DownloadError.swift in Sources */,
 				B502D4F62B1A35150040C729 /* LanguageCellView.swift in Sources */,
 				B502D4F42B1A34EF0040C729 /* LanguageListView.swift in Sources */,
