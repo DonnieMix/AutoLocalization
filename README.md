@@ -43,7 +43,7 @@ override func viewDidAppear(_ animated: Bool) {
 > [!IMPORTANT]
 > Note, that your View Controller must already be on the screen to localize elements, so here we call ```localizeInterface(from:, to:, options:)``` **EXACTLY** in ```viewDidAppear``` method.
 
-### Language Selection List in a Separate ViewController
+### Language Selection List in a ViewController
 
 You can also call a language selection list in your view controller. Here's an example:
 
