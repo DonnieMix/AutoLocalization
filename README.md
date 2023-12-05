@@ -45,7 +45,7 @@ override func viewDidAppear(_ animated: Bool) {
 
 ### Language Selection List in a Separate ViewController
 
-You can also create a language selection list in a separate view controller. Here's an example:
+You can also call a language selection list in your view controller. Here's an example:
 
 1. Import the AutoLocalization framework.
    
@@ -53,17 +53,11 @@ You can also create a language selection list in a separate view controller. Her
 import AutoLocalization
 ```
 
-2. Create an instance of UILanguageListView in your view controller.
+2. Create an instance of UILanguagePickViewController in your View Controller and present it.
    
 ```swift
-override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    let languageListView = UILanguageListView(self, options: .all, onLanguageChosenAction: { _ in
-        self.dismiss(animated: true)
-    })
-    view.addSubview(languageListView)
-}
+let langvc = UILanguagePickViewController()
+self.present(langvc, animated: true, completion: nil)
 ```
 
 This setup allows users to select their preferred language from a list, triggering the chosen language's localization.
