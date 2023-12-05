@@ -6,6 +6,20 @@ AutoLocalization is a Swift framework designed to simplify and streamline the lo
 
 To integrate AutoLocalization into your Xcode project, follow these steps:
 
+### CocoaPods installation guide
+
+To install the CocoaPods version of framework:
+
+1. Initialize CocoaPods project if you haven't done so yet:
+
+   + Open your project directory in terminal and write ```pod init```.
+
+   + After this you will see the **Podfile** generated inside project directory.
+
+2. Open **Podfile** and write the pod into your pods section by using ```pod 'AutoLocalization'```.
+
+3. Write ```pod install``` back in your console and you're ready to go.
+
 ## Usage
 
 ### Basic Localization in a View Controller
